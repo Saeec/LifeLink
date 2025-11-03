@@ -1,0 +1,82 @@
+.info-page-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.info-section {
+  margin-bottom: 3rem;
+}
+
+.info-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #d90429; /* Theme Red */
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* About Us Section */
+.mission-statement {
+  font-size: 1.15rem;
+  text-align: center;
+  color: #555;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.our-vision {
+  text-align: center;
+  color: #333;
+}
+
+/* FAQ Accordion */
+.faq-item {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  overflow: hidden; /* For the animation */
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: #f9f9f9;
+  cursor: pointer;
+  font-weight: 600;
+  color: #333;
+}
+
+.faq-question:hover {
+  background: #f1f1f1;
+}
+
+.faq-icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.faq-question.active .faq-icon {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  background: #fff;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+.faq-answer.open {
+  max-height: 200px; /* Set to a height larger than any answer */
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #eee;
+  line-height: 1.6;
+}

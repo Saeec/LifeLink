@@ -1,10 +1,7 @@
 import axios from 'axios';
 
-// The 'proxy' in package.json will automatically prepend 'http://localhost:5000'
-// to these requests during development.
 const API_BASE_URL = '/api';
 
-// Create an axios instance
 const api = axios.create({
   baseURL: API_BASE_URL,
 });
@@ -14,21 +11,73 @@ export const getHospitals = () => {
   return api.get('/hospitals');
 };
 
-// TODO: Add functions for other services
-// --- Inventory Service ---
-// export const getInventory = (hospitalId) => api.get(`/inventory/${hospitalId}`);
+// --- Auth Service (Users) ---
+export const registerUser = (userData) => api.post('/auth/register', userData);
+export const loginUser = (credentials) => api.post('/auth/login', credentials);
 
-// --- Auth Service ---
-// export const loginUser = (credentials) => api.post('/auth/login', credentials);
-// export const registerUser = (userData) => api.post('/auth/register', userData);
+// --- Auth Service (Hospitals) ---
+export const registerHospital = (hospitalData) => api.post('/hospital-auth/register', hospitalData);
+export const loginHospital = (credentials) => api.post('/hospital-auth/login', credentials);
 
+// --- ADD THESE NEW FUNCTIONS ---
+// --- Form Submissions ---
+export const submitDonateForm = (formData) => api.post('/donate', formData);
+export const submitRequestForm = (formData) => api.post('/request', formData);
+// --- User Dashboard ---
+export const getDashboardData = (token) => {
+  return api.get('/dashboard', {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+};
+export const getHospitalDashboardData = (token) => {
+  return api.get('/hospital-dashboard', {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+};
+export const updateStock = (token, stockData) => {
+  return api.post('/stock', stockData, {
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+};
+// --- Request Management ---
+export const claimRequest = (token, request_healthcard) => {
+  return api.post('/request-management/claim', { request_healthcard }, {
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+};
+export const updateRequestStatus = (token, requestId, status) => {
+  return api.put(`/request-management/${requestId}`, { status }, {
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+};
+/*/ --- ADD THIS (We'll use this next) ---
+// --- Donor Management ---
+export const acceptDonation = (token, donorData) => {
+  return api.post('/hospital-dashboard/accept-donation', donorData, {
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+};*/
+// -----------------------------
 
-// Default export (optional, but convenient)
+// Default export
 const apiService = {
   getHospitals,
-  // getInventory,
-  // loginUser,
-  // registerUser
+  registerUser,
+  loginUser,
+  registerHospital,
+  loginHospital,
+  submitDonateForm, // Add here
+  submitRequestForm, 
+  getDashboardData,// Add here
+  getHospitalDashboardData,
+  updateStock,
+  claimRequest,
+  updateRequestStatus,
+  //acceptDonation,
 };
 
 export default apiService;

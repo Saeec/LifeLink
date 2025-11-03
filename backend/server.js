@@ -7,26 +7,26 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // === Middleware ===
-// Enable CORS (Cross-Origin Resource Sharing)
 app.use(cors());
-// Parse JSON request bodies
 app.use(express.json());
 
 // === API Routes ===
-// Test route
 app.get('/', (req, res) => {
   res.send('LifeLink API is running...');
 });
 
-// Mount hospital routes
 app.use('/api/hospitals', require('./routes/hospitalRoutes'));
 
-// TODO: Add other routes here
-// app.use('/api/inventory', require('./routes/inventoryRoutes'));
-// app.use('/api/donations', require('./routes/donationRoutes'));
-// app.use('/api/requests', require('./routes/requestRoutes'));
-// app.use('/api/auth', require('./routes/authRoutes'));
-
+// --- ADD THESE NEW LINES ---
+app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/hospital-auth', require('./routes/hospitalAuthRoutes'));
+app.use('/api/donate', require('./routes/donateRoutes'));
+app.use('/api/request', require('./routes/requestRoutes'));
+app.use('/api/dashboard', require('./routes/dashboardRoutes'));
+app.use('/api/hospital-dashboard', require('./routes/hospitalDashboardRoutes'));
+app.use('/api/stock', require('./routes/stockRoutes'));
+app.use('/api/request-management', require('./routes/requestManagementRoutes'));
+// ---------------------------
 
 // === Start Server ===
 app.listen(PORT, () => {

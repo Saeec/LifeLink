@@ -1,87 +1,576 @@
+/* General Body and Background */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f9fa; /* Light grey fallback */
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Background Image with Overlay */
+#root {
+  min-height: 100vh; /* Ensure the root element covers the full height */
+  display: flex;
+  flex-direction: column;
+}
+
+.App {
+  flex-grow: 1; /* Allow App content to grow and push footer down if added */
+  background-image: url('https://as2.ftcdn.net/jpg/05/00/92/09/1000_F_500920924_hOcfnx36XTblcBxSOSPb4Q45Ns8pUmlF.jpg'); /* Replace with your image URL */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Makes the background scroll with content */
+  position: relative; /* For the overlay */
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.App::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7); /* White overlay with 70% opacity */
+  z-index: -1; /* Place it behind the content */
+}
+
+/* Header */
 .app-header {
-  background-color: #d90429; /* Red color */
-  padding: 20px 40px;
+  background-color: #d90429; /* Primary Red */
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color: white;
+  z-index: 10; /* Ensure header is above overlay */
+}
+
+.app-header .logo h1 {
+  margin: 0;
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 700;
 }
 
 .app-header .logo {
   text-decoration: none;
 }
 
-.app-header h1 {
-  color: white;
-  margin: 0;
-  font-size: 1.8rem;
-}
-
-.app-header nav {
-  display: flex;
-  gap: 20px;
-}
-
+/* Navigation */
 .app-header nav a {
   color: white;
   text-decoration: none;
+  margin-left: 25px;
   font-weight: 500;
-  padding: 8px 12px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
+  transition: color 0.3s ease, transform 0.2s ease;
+  padding: 0.5rem 0; /* Add padding for better hover area */
 }
 
 .app-header nav a:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffc2d1; /* Lighter red on hover */
+  transform: translateY(-2px);
 }
 
-.app-header nav a.login-btn {
-  background-color: #fff;
-  color: #d90429;
-  font-weight: bold;
+.app-header nav .login-btn {
+  background-color: #ef233c; /* Slightly darker red for button */
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  margin-left: 30px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.app-header nav .login-btn:hover {
+  background-color: #d90429; /* Primary red on hover */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Main Content Container */
+.container {
+  flex-grow: 1; /* Allow container to take available space */
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative; /* For ensuring content is above overlay */
+  z-index: 2;
+}
+
+/* Homepage Styles */
 .homepage {
   text-align: center;
-  padding-top: 50px;
+  padding: 5rem 2rem;
+  background: rgba(255, 255, 255, 0.9); /* Slightly more opaque background for homepage content */
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  margin-top: 5rem; /* Push it down from header */
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* --- HospitalList.js Styles --- */
-.hospital-list {
+.homepage h2 {
+  font-size: 3rem;
+  color: #d90429;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.homepage p {
+  font-size: 1.3rem;
+  color: #555;
+  margin-bottom: 3rem;
+  line-height: 1.5;
+}
+
+.homepage .cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 30px;
+}
+
+/* General Button Styles */
+.btn {
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  background-color: #d90429;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #ef233c;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Container Styles */
+.form-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+  text-align: center;
+  color: #d90429;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.7rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Include padding in width */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #d90429;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(217, 4, 41, 0.2);
+}
+
+.form-container button[type="submit"] {
+  width: 100%;
+  padding: 1rem;
+  background-color: #d90429;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container button[type="submit"]:hover {
+  background-color: #ef233c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.form-container .error {
+  color: #e74c3c;
+  text-align: center;
+  margin-top: 1.5rem;
+  font-weight: 500;
+}
+
+.form-container p a {
+  color: #d90429;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.form-container p a:hover {
+  text-decoration: underline;
+}
+
+/* Dashboard Styles */
+.dashboard-container {
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.dashboard-header h2 {
+  color: #d90429;
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+.btn-logout {
+  background-color: #6c757d; /* Grey */
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-logout:hover {
+  background-color: #5a6268;
+}
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.stat-card {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-left: 5px solid #d90429; /* Accent color */
+}
+
+.stat-card h3 {
+  font-size: 2.5rem;
+  color: #d90429;
+  margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+}
+
+.dashboard-section {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.dashboard-section h3 {
+  color: #d90429;
+  font-size: 1.8rem;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-top: 1.5rem;
 }
 
-.hospital-list th,
-.hospital-list td {
-  border: 1px solid #ddd;
-  padding: 12px;
+.dashboard-table th,
+.dashboard-table td {
+  padding: 12px 15px;
   text-align: left;
+  border-bottom: 1px solid #eee;
 }
 
-.hospital-list th {
+.dashboard-table th {
   background-color: #f8f8f8;
   font-weight: 600;
-}
-
-.hospital-list tr:nth-child(even) {
-  background-color: #fdfdfd;
-}
-
-.hospital-list tr:hover {
-  background-color: #f1f1f1;
-}
-
-.loading,
-.error {
-  font-size: 1.2rem;
-  text-align: center;
-  margin-top: 40px;
   color: #555;
+  text-transform: uppercase;
+  font-size: 0.9rem;
 }
 
-.error {
+.dashboard-table tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+.status-badge {
+  padding: 0.4em 0.8em;
+  border-radius: 15px;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: white;
+}
+
+.status-badge.status-pending {
+  background-color: #ffc107; /* Yellow */
+}
+
+.status-badge.status-approved {
+  background-color: #28a745; /* Green */
+}
+
+.status-badge.status-rejected {
+  background-color: #dc3545; /* Red */
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
   color: #d90429;
+}
+
+/* --- Hospital Admin Dashboard Styles --- */
+.hospital-admin .stat-card {
+  border-left-color: #007bff; /* Blue for admin */
+}
+
+.hospital-admin .stat-card h3 {
+  color: #007bff;
+}
+
+.btn-action {
+  padding: 0.3rem 0.6rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.btn-action.approve {
+  background-color: #c8e6c9;
+  color: #2e7d32;
+}
+.btn-action.approve:hover {
+  background-color: #a5d6a7;
+}
+
+.btn-action.reject {
+  background-color: #ffcdd2;
+  color: #c62828;
+}
+.btn-action.reject:hover {
+  background-color: #ef9a9a;
+}
+
+.btn-action.manage {
+  background-color: #e0e0e0;
+  color: #333;
+}
+.btn-action.manage:hover {
+  background-color: #bdbdbd;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.section-header h3 {
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+
+/* For AddStockModal.css - no changes needed if you have it already */
+/* If you don't have it, include these styles in App.css for now */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.btn-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #888;
+}
+.btn-close:hover {
+  color: #000;
+}
+
+.stock-info {
+  background: #f4f4f4;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.stock-info p {
+  margin: 0;
+  color: #333;
+}
+
+/* InfoPage.css - you can keep it in its own file or merge here */
+.info-page-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.info-section {
+  margin-bottom: 3rem;
+}
+
+.info-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #d90429; /* Theme Red */
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* About Us Section */
+.mission-statement {
+  font-size: 1.15rem;
+  text-align: center;
+  color: #555;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.our-vision {
+  text-align: center;
+  color: #333;
+}
+
+/* FAQ Accordion */
+.faq-item {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  overflow: hidden; /* For the animation */
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: #f9f9f9;
+  cursor: pointer;
+  font-weight: 600;
+  color: #333;
+}
+
+.faq-question:hover {
+  background: #f1f1f1;
+}
+
+.faq-icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.faq-question.active .faq-icon {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  background: #fff;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+.faq-answer.open {
+  max-height: 200px; /* Set to a height larger than any answer */
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #eee;
+  line-height: 1.6;
 }
