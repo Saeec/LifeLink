@@ -1,0 +1,87 @@
+.app-header {
+  background-color: #d90429; /* Red color */
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.app-header .logo {
+  text-decoration: none;
+}
+
+.app-header h1 {
+  color: white;
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.app-header nav {
+  display: flex;
+  gap: 20px;
+}
+
+.app-header nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.app-header nav a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.app-header nav a.login-btn {
+  background-color: #fff;
+  color: #d90429;
+  font-weight: bold;
+}
+
+.homepage {
+  text-align: center;
+  padding-top: 50px;
+}
+
+/* --- HospitalList.js Styles --- */
+.hospital-list {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.hospital-list th,
+.hospital-list td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.hospital-list th {
+  background-color: #f8f8f8;
+  font-weight: 600;
+}
+
+.hospital-list tr:nth-child(even) {
+  background-color: #fdfdfd;
+}
+
+.hospital-list tr:hover {
+  background-color: #f1f1f1;
+}
+
+.loading,
+.error {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 40px;
+  color: #555;
+}
+
+.error {
+  color: #d90429;
+}
