@@ -30,7 +30,8 @@
 <a name="screenshots"></a>
 ## 📸 Application Screenshots
 
-*(**Recommendation:** Replace this placeholder with a high-quality GIF or a set of screenshots showing your app's main pages, like the User Dashboard and Hospital Admin Panel.)*
+*<img width="1839" height="865" alt="image" src="https://github.com/user-attachments/assets/e697a289-95b2-4be8-8309-08f13cce003b" />
+*
 
 ![LifeLink App Demo](https-i-imgur-com-your-app-screenshot-gif.gif)
 
@@ -187,6 +188,6 @@ Distributed under the MIT License. See `LICENSE` file for more information.
 <a name="contact"></a>
 ## 📬 Contact
 
-**(Your Name)** - **(Your GitHub Username)** - **(your.email@example.com)**
+**Saee Chavan** - **SaeeC** 
 
-Project Link: [https://github.com/your-username/lifelink](https://github.com/your-username/lifelink)
+Project Link: [https://github.com/Saeec/LifeLink](https://github.com/Saeec/LifeLink)
