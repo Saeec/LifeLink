@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="https-i-imgur-com-your-logo-image-png.png" alt="LifeLink Logo" width="120">
-</p>
+
 
 <h1 align="center">🩸 LifeLink Blood Bank</h1>
 
