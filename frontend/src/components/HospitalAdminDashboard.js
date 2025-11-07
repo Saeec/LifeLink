@@ -1,13 +1,21 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import apiService from '../services/apiService';
-import AddStockModal from './AddStockModal'; // Import the modal
+import AddStockModal from './AddStockModal'; // Import the stock modal
+
+// --- 1. IMPORT THE NEW DONATION MODAL ---
+import LogDonationModal from './LogDonationModal';
 
 const HospitalAdminDashboard = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [showStockModal, setShowStockModal] = useState(false);
+
+  // --- 2. ADD NEW STATE FOR DONATION MODAL ---
+  const [showDonationModal, setShowDonationModal] = useState(false);
+  const [selectedDonor, setSelectedDonor] = useState(null);
+
   const navigate = useNavigate();
 
   // Use useCallback to create a stable function for useEffect
@@ -66,6 +74,12 @@ const HospitalAdminDashboard = () => {
     }
   };
 
+  // --- 3. ADD A HANDLER FOR THE DONATION BUTTON ---
+  const handleAcceptDonationClick = (donor) => {
+    setSelectedDonor(donor);
+    setShowDonationModal(true);
+  };
+
   // --- Render ---
   if (loading) {
     return <div className="loading">Loading Hospital Dashboard...</div>;
@@ -89,6 +103,15 @@ const HospitalAdminDashboard = () => {
           hospitalCapacity={profile.capacity}
           onClose={() => setShowStockModal(false)}
           onStockAdded={fetchData} // Refresh data on success
+        />
+      )}
+
+      {/* --- 4. RENDER THE NEW MODAL --- */}
+      {showDonationModal && selectedDonor && (
+        <LogDonationModal
+          donor={selectedDonor}
+          onClose={() => setShowDonationModal(false)}
+          onDonationLogged={fetchData}
         />
       )}
 
@@ -225,7 +248,13 @@ const HospitalAdminDashboard = () => {
                     <td>{don.bloodtype}</td>
                     <td>{don.phone}</td>
                     <td>
-                      <button className="btn-action approve">Accept Donation</button>
+                      {/* --- 5. UPDATE THIS BUTTON --- */}
+                      <button 
+                        onClick={() => handleAcceptDonationClick(don)} 
+                        className="btn-action approve"
+                      >
+                        Accept & Log Donation
+                      </button>
                     </td>
                   </tr>
                 ))}

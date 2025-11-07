@@ -54,6 +54,22 @@ export const updateRequestStatus = (token, requestId, status) => {
     headers: { 'Authorization': `Bearer ${token}` }
   });
 };
+export const logDonation = (token, donationData) => {
+  return api.post('/donations/log', donationData, {
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+};
+export const updateUserProfile = (token, profileData) => {
+  return api.put('/profile/update', profileData, {
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+};
+export const changePassword = (token, passwordData) => {
+  return api.put('/profile/change-password', passwordData, {
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+};
+
 /*/ --- ADD THIS (We'll use this next) ---
 // --- Donor Management ---
 export const acceptDonation = (token, donorData) => {
@@ -77,6 +93,9 @@ const apiService = {
   updateStock,
   claimRequest,
   updateRequestStatus,
+  logDonation,
+  updateUserProfile,
+  changePassword,
   //acceptDonation,
 };
 

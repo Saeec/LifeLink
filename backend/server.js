@@ -26,6 +26,8 @@ app.use('/api/dashboard', require('./routes/dashboardRoutes'));
 app.use('/api/hospital-dashboard', require('./routes/hospitalDashboardRoutes'));
 app.use('/api/stock', require('./routes/stockRoutes'));
 app.use('/api/request-management', require('./routes/requestManagementRoutes'));
+app.use('/api/donations', require('./routes/donationRoutes'));
+app.use('/api/profile', require('./routes/profileRoutes'));
 // ---------------------------
 
 // === Start Server ===

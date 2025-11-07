@@ -11,7 +11,9 @@ import HospitalAdminDashboard from './components/HospitalAdminDashboard';
 // --- IMPORT NEW COMPONENTS ---
 import DonateForm from './components/DonateForm';
 import RequestForm from './components/RequestForm';
-import InfoPage from './components/InfoPage'
+import InfoPage from './components/InfoPage';
+import ProfileManagement from './components/ProfileManagement';
+import Footer from './components/Footer';
 
 
 import './App.css';
@@ -25,7 +27,7 @@ function App() {
         </Link>
         <nav>
           <Link to="/">Home</Link>
-          <Link to="/hospitals">Find Hospitals</Link>
+          
           <Link to="/donate">Donate</Link>
           <Link to="/request">Request Blood</Link>
           <Link to="/about">About & FAQ</Link>
@@ -53,12 +55,14 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/hospital/admin" element={<HospitalAdminDashboard />} />
           <Route path="/about" element={<InfoPage />} />
+          <Route path="/profile-settings" element={<ProfileManagement />} />
 
           {/* TODO: Create components for these routes */}
           {/* <Route path="/hospital/admin" element={<HospitalAdminDashboard />} /> */}
 
         </Routes>
       </main>
+      <Footer />
     </div>
   );
 }

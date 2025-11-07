@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+// --- 1. IMPORT Link ---
+import { useNavigate, Link } from 'react-router-dom';
 import apiService from '../services/apiService';
 
 const Dashboard = () => {
@@ -54,9 +55,8 @@ const Dashboard = () => {
 
   const { profile, donations, requests } = data;
   
-  // --- UPDATED STATS ---
   const pendingRequests = requests.filter(r => r.approval_status === 'Pending').length;
-  const totalPledges = donations.length; // Changed from totalDonatedMl
+  const totalDonatedMl = donations.reduce((acc, curr) => acc + curr.quantity_ml, 0);
 
   return (
     <div className="dashboard-container">
@@ -65,11 +65,15 @@ const Dashboard = () => {
         <button onClick={handleLogout} className="btn btn-logout">Logout</button>
       </div>
 
-      {/* --- STATS CARDS (Updated) --- */}
+      {/* --- STATS CARDS --- */}
       <div className="stats-container">
         <div className="stat-card">
-          <h3>{totalPledges}</h3>
-          <p>Total Pledges Made</p>
+          <h3>{donations.length}</h3>
+          <p>Total Donations Made</p>
+        </div>
+        <div className="stat-card">
+          <h3>{totalDonatedMl} ml</h3>
+          <p>Total Blood Donated</p>
         </div>
         <div className="stat-card">
           <h3>{requests.length}</h3>
@@ -81,7 +85,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* --- MY REQUESTS SECTION (This was already correct) --- */}
+      {/* --- MY REQUESTS SECTION (Updated Table) --- */}
       <div className="dashboard-section">
         <h3>My Blood Requests</h3>
         {requests.length > 0 ? (
@@ -91,6 +95,7 @@ const Dashboard = () => {
                 <th>Blood Type</th>
                 <th>Reason</th>
                 <th>Status</th>
+                <th>Approved By</th>
               </tr>
             </thead>
             <tbody>
@@ -103,6 +108,17 @@ const Dashboard = () => {
                       {req.approval_status || 'Pending'}
                     </span>
                   </td>
+                  <td>
+                    {req.approval_status === 'Approved' ? (
+                      <>
+                        <strong>{req.hospital_name}</strong>
+                        <br />
+                        <small>{req.contact_number}</small>
+                      </>
+                    ) : (
+                      'N/A'
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -112,42 +128,41 @@ const Dashboard = () => {
         )}
       </div>
 
-      {/* --- MY DONATIONS SECTION (Updated Table) --- */}
+      {/* --- MY DONATION HISTORY SECTION --- */}
       <div className="dashboard-section">
-        <h3>My Donation Pledges</h3>
+        <h3>My Donation History</h3>
         {donations.length > 0 ? (
           <table className="dashboard-table">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Blood Type</th>
-                <th>Phone</th>
-                <th>Status</th>
+                <th>Date</th>
+                <th>Hospital</th>
+                <th>Quantity</th>
               </tr>
             </thead>
             <tbody>
               {donations.map((don, index) => (
                 <tr key={index}>
-                  <td>{don.firstname} {don.lastname}</td>
-                  <td>{don.bloodtype}</td>
-                  <td>{don.phone}</td>
-                  <td>
-                    <span className="status-badge status-pending">
-                      Pledged
-                    </span>
-                  </td>
+                  <td>{new Date(don.date_of_donation).toLocaleDateString()}</td>
+                  <td>{don.hospital_name}</td>
+                  <td>{don.quantity_ml} ml</td>
                 </tr>
               ))}
             </tbody>
           </table>
         ) : (
-          <p>You have not pledged to donate yet.</p>
+          <p>You have no completed donations in your history.</p>
         )}
       </div>
 
-      {/* --- MY PROFILE SECTION (This was already correct) --- */}
+      {/* --- MY PROFILE SECTION --- */}
       <div className="dashboard-section">
-        <h3>My Profile</h3>
+        {/* --- 2. ADD THIS 'section-header' DIV --- */}
+        <div className="section-header">
+          <h3>My Profile</h3>
+          {/* --- 3. ADD THIS LINK/BUTTON --- */}
+          <Link to="/profile-settings" className="btn-action manage">Edit Profile</Link>
+        </div>
         <div className="profile-card">
           <p><strong>Name:</strong> {profile.firstname} {profile.lastname}</p>
           <p><strong>Email:</strong> {profile.email}</p>

@@ -11,18 +11,18 @@ body {
 
 /* Background Image with Overlay */
 #root {
-  min-height: 100vh; /* Ensure the root element covers the full height */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 .App {
-  flex-grow: 1; /* Allow App content to grow and push footer down if added */
-  background-image: url('https://as2.ftcdn.net/jpg/05/00/92/09/1000_F_500920924_hOcfnx36XTblcBxSOSPb4Q45Ns8pUmlF.jpg'); /* Replace with your image URL */
+  flex-grow: 1;
+  background-image: url('https://as2.ftcdn.net/jpg/05/00/92/09/1000_F_500920924_hOcfnx36XTblcBxSOSPb4Q45Ns8pUmlF.jpg'); /* Your Image */
   background-size: cover;
   background-position: center;
-  background-attachment: fixed; /* Makes the background scroll with content */
-  position: relative; /* For the overlay */
+  background-attachment: fixed;
+  position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -35,20 +35,30 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.7); /* White overlay with 70% opacity */
-  z-index: -1; /* Place it behind the content */
+  /* --- CHANGE --- Reduced overlay opacity to let image show more */
+  background-color: rgba(255, 255, 255, 0.6); 
+  z-index: -1;
 }
 
-/* Header */
+/* --- UPGRADED HEADER --- */
+/* Makes the header "float" and stick to the top on scroll */
 .app-header {
-  background-color: #d90429; /* Primary Red */
+  /* --- NEW EFFECT --- */
+  background: rgba(217, 4, 41, 0.85); /* Semi-transparent red */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  /* --- END NEW EFFECT --- */
+  
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   color: white;
-  z-index: 10; /* Ensure header is above overlay */
+  position: sticky; /* <-- NEW */
+  top: 0;           /* <-- NEW */
+  z-index: 1000;    /* <-- NEW (Higher) */
 }
 
 .app-header .logo h1 {
@@ -56,6 +66,7 @@ body {
   color: white;
   font-size: 1.8rem;
   font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.2); /* <-- NEW */
 }
 
 .app-header .logo {
@@ -69,48 +80,66 @@ body {
   margin-left: 25px;
   font-weight: 500;
   transition: color 0.3s ease, transform 0.2s ease;
-  padding: 0.5rem 0; /* Add padding for better hover area */
+  padding: 0.5rem 0;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.2); /* <-- NEW */
 }
 
 .app-header nav a:hover {
-  color: #ffc2d1; /* Lighter red on hover */
+  color: #ffc2d1;
   transform: translateY(-2px);
 }
 
+/* --- UPGRADED BUTTON --- */
 .app-header nav .login-btn {
-  background-color: #ef233c; /* Slightly darker red for button */
+  background: #fff; /* <-- CHANGE */
+  color: #d90429; /* <-- CHANGE */
   padding: 0.6rem 1.2rem;
   border-radius: 25px;
   margin-left: 30px;
-  font-weight: 600;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-weight: 700; /* <-- CHANGE */
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .app-header nav .login-btn:hover {
-  background-color: #d90429; /* Primary red on hover */
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  background: #ffc2d1; /* <-- CHANGE */
+  color: #d90429; /* <-- CHANGE */
+  transform: translateY(-3px) scale(1.05); /* <-- CHANGE */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Main Content Container */
 .container {
-  flex-grow: 1; /* Allow container to take available space */
+  flex-grow: 1;
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  position: relative; /* For ensuring content is above overlay */
+  position: relative;
   z-index: 2;
+}
+
+/* --- UPGRADED "GLASS" CONTAINERS --- */
+/* This style applies to all main content boxes */
+.homepage,
+.form-container,
+.dashboard-container,
+.info-page-container {
+  /* --- NEW EFFECT --- */
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  /* --- END NEW EFFECT --- */
+
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Softer, larger shadow */
 }
 
 /* Homepage Styles */
 .homepage {
   text-align: center;
   padding: 5rem 2rem;
-  background: rgba(255, 255, 255, 0.9); /* Slightly more opaque background for homepage content */
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  margin-top: 5rem; /* Push it down from header */
+  margin-top: 5rem;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
@@ -137,7 +166,7 @@ body {
   margin-top: 30px;
 }
 
-/* General Button Styles */
+/* --- UPGRADED BUTTON STYLES --- */
 .btn {
   padding: 1rem 2.5rem;
   border: none;
@@ -147,19 +176,25 @@ body {
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
-  transition: all 0.3s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease; /* Slower transition */
 }
 
 .btn-primary {
-  background-color: #d90429;
   color: white;
+  /* --- NEW EFFECT: Gradient & Animation --- */
+  background-image: linear-gradient(to right, #d90429 0%, #ef233c 50%, #d90429 100%);
+  background-size: 200% auto;
 }
 
 .btn-primary:hover {
-  background-color: #ef233c;
+  background-position: right center; /* Slide the gradient */
   transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 15px rgba(217, 4, 41, 0.3);
+}
+
+.btn:active {
+  transform: scale(0.95); /* Button press effect */
 }
 
 /* Form Container Styles */
@@ -167,9 +202,6 @@ body {
   max-width: 500px;
   margin: 2rem auto;
   padding: 2.5rem;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .form-container h2 {
@@ -198,36 +230,41 @@ body {
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 1rem;
-  box-sizing: border-box; /* Include padding in width */
+  box-sizing: border-box;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(255,255,255,0.5); /* Slightly transparent inputs */
 }
 
+/* --- UPGRADED FOCUS --- */
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
   border-color: #d90429;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(217, 4, 41, 0.2);
+  box-shadow: 0 0 0 4px rgba(217, 4, 41, 0.25); /* Stronger glow */
+  background: #fff;
 }
 
 .form-container button[type="submit"] {
   width: 100%;
   padding: 1rem;
-  background-color: #d90429;
   color: white;
   border: none;
   border-radius: 6px;
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  /* --- NEW EFFECT: Gradient & Animation (from .btn-primary) --- */
+  background-image: linear-gradient(to right, #d90429 0%, #ef233c 50%, #d90429 100%);
+  background-size: 200% auto;
+  transition: all 0.4s ease;
 }
 
 .form-container button[type="submit"]:hover {
-  background-color: #ef233c;
+  background-position: right center;
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 12px rgba(217, 4, 41, 0.3);
 }
 
 .form-container .error {
@@ -249,10 +286,7 @@ body {
 
 /* Dashboard Styles */
 .dashboard-container {
-  background: #fff;
   padding: 2.5rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
 }
 
@@ -272,17 +306,22 @@ body {
 }
 
 .btn-logout {
-  background-color: #6c757d; /* Grey */
+  background-color: #6c757d;
   color: white;
   padding: 0.6rem 1.5rem;
   border-radius: 5px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 .btn-logout:hover {
   background-color: #5a6268;
+  transform: translateY(-2px);
 }
 
+/* --- UPGRADED STAT CARDS --- */
 .stats-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -291,12 +330,20 @@ body {
 }
 
 .stat-card {
-  background: #f9f9f9;
+  background: rgba(249, 249, 249, 0.7); /* Glassy */
+  backdrop-filter: blur(5px);
   padding: 1.5rem;
   border-radius: 8px;
   text-align: center;
+  border: 1px solid rgba(255,255,255,0.5);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  border-left: 5px solid #d90429; /* Accent color */
+  border-left: 5px solid #d90429;
+  transition: all 0.3s ease; /* <-- NEW */
+}
+
+.stat-card:hover {
+  transform: translateY(-5px); /* <-- NEW */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* <-- NEW */
 }
 
 .stat-card h3 {
@@ -318,6 +365,7 @@ body {
   padding: 2rem;
   margin-bottom: 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  background: rgba(255,255,255,0.5); /* Glassy */
 }
 
 .dashboard-section h3 {
@@ -342,7 +390,7 @@ body {
 }
 
 .dashboard-table th {
-  background-color: #f8f8f8;
+  background-color: rgba(248, 248, 248, 0.7); /* Glassy */
   font-weight: 600;
   color: #555;
   text-transform: uppercase;
@@ -350,39 +398,45 @@ body {
 }
 
 .dashboard-table tbody tr:hover {
-  background-color: #f0f0f0;
+  background-color: rgba(217, 4, 41, 0.05); /* Light red tint */
 }
 
+/* --- UPGRADED BADGES --- */
 .status-badge {
-  padding: 0.4em 0.8em;
-  border-radius: 15px;
-  font-size: 0.85em;
-  font-weight: 600;
-  color: white;
+  padding: 0.3em 0.9em;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: capitalize;
 }
 
 .status-badge.status-pending {
-  background-color: #ffc107; /* Yellow */
+  background-color: #fff8e1; /* Light yellow */
+  color: #f57f17; /* Dark yellow */
 }
 
 .status-badge.status-approved {
-  background-color: #28a745; /* Green */
+  background-color: #e8f5e9; /* Light green */
+  color: #2e7d32; /* Dark green */
 }
 
 .status-badge.status-rejected {
-  background-color: #dc3545; /* Red */
+  background-color: #ffebee; /* Light red */
+  color: #c62828; /* Dark red */
 }
 
 .loading, .error {
   text-align: center;
-  padding: 2rem;
+  padding: 3rem;
   font-size: 1.2rem;
   color: #d90429;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
 }
 
 /* --- Hospital Admin Dashboard Styles --- */
 .hospital-admin .stat-card {
-  border-left-color: #007bff; /* Blue for admin */
+  border-left-color: #007bff;
 }
 
 .hospital-admin .stat-card h3 {
@@ -390,37 +444,43 @@ body {
 }
 
 .btn-action {
-  padding: 0.3rem 0.6rem;
+  padding: 0.4rem 0.8rem; /* Slightly larger */
   border: none;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  font-weight: bold;
+  border-radius: 6px; /* Soften edges */
+  font-size: 0.85rem; /* Slightly larger */
+  font-weight: 600;
   cursor: pointer;
   margin-right: 5px;
+  transition: all 0.2s ease;
+}
+
+.btn-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .btn-action.approve {
-  background-color: #c8e6c9;
-  color: #2e7d32;
+  background-color: #28a745;
+  color: #fff;
 }
 .btn-action.approve:hover {
-  background-color: #a5d6a7;
+  background-color: #218838;
 }
 
 .btn-action.reject {
-  background-color: #ffcdd2;
-  color: #c62828;
+  background-color: #dc3545;
+  color: #fff;
 }
 .btn-action.reject:hover {
-  background-color: #ef9a9a;
+  background-color: #c82333;
 }
 
 .btn-action.manage {
-  background-color: #e0e0e0;
-  color: #333;
+  background-color: #007bff;
+  color: #fff;
 }
 .btn-action.manage:hover {
-  background-color: #bdbdbd;
+  background-color: #0069d9;
 }
 
 .section-header {
@@ -438,19 +498,21 @@ body {
   padding: 0;
 }
 
-/* For AddStockModal.css - no changes needed if you have it already */
-/* If you don't have it, include these styles in App.css for now */
+/* Modal Styles (Unchanged, but included) */
 .modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6); /* Darker backdrop */
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  /* --- NEW EFFECT --- */
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
 }
 
 .modal-content {
@@ -461,6 +523,7 @@ body {
   max-width: 500px;
   position: relative;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border-top: 5px solid #d90429; /* Accent */
 }
 
 .btn-close {
@@ -491,14 +554,11 @@ body {
   color: #333;
 }
 
-/* InfoPage.css - you can keep it in its own file or merge here */
+/* InfoPage (Glassmorphism is applied by .info-page-container) */
 .info-page-container {
   max-width: 900px;
   margin: 2rem auto;
   padding: 2rem;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .info-section {
@@ -508,13 +568,12 @@ body {
 .info-section h2 {
   text-align: center;
   font-size: 2rem;
-  color: #d90429; /* Theme Red */
+  color: #d90429;
   border-bottom: 2px solid #f0f0f0;
   padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
 }
 
-/* About Us Section */
 .mission-statement {
   font-size: 1.15rem;
   text-align: center;
@@ -534,7 +593,12 @@ body {
   border: 1px solid #eee;
   border-radius: 4px;
   margin-bottom: 10px;
-  overflow: hidden; /* For the animation */
+  overflow: hidden;
+  background: rgba(255,255,255,0.4); /* Glassy item */
+  transition: all 0.3s ease;
+}
+.faq-item:hover {
+  border-color: #ddd;
 }
 
 .faq-question {
@@ -542,19 +606,20 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.5rem;
-  background: #f9f9f9;
+  background: rgba(249, 249, 249, 0.5);
   cursor: pointer;
   font-weight: 600;
   color: #333;
 }
 
 .faq-question:hover {
-  background: #f1f1f1;
+  background: rgba(241, 241, 241, 0.8);
 }
 
 .faq-icon {
   font-size: 1.2rem;
   transition: transform 0.3s ease;
+  color: #d90429;
 }
 
 .faq-question.active .faq-icon {
@@ -569,8 +634,9 @@ body {
 }
 
 .faq-answer.open {
-  max-height: 200px; /* Set to a height larger than any answer */
+  max-height: 200px;
   padding: 1rem 1.5rem;
   border-top: 1px solid #eee;
   line-height: 1.6;
+  background: rgba(255,255,255,0.8);
 }

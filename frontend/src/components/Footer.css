@@ -1,0 +1,94 @@
+.footer {
+  /* --- NEW EFFECT --- */
+  background: rgba(34, 34, 34, 0.9); /* Dark, semi-transparent */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  /* --- END NEW EFFECT --- */
+  
+  color: #ccc;
+  padding: 3rem 2rem;
+  margin-top: auto; /* Pushes the footer to the bottom */
+  width: 100%;
+  box-sizing: border-box; /* Include padding in width */
+  z-index: 10;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  padding: 1rem;
+}
+
+.footer-section h4 {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+/* Red accent line under headings */
+.footer-section h4::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 50px;
+  height: 3px;
+  background-color: #d90429;
+}
+
+.footer-section p {
+  line-height: 1.7;
+  color: #ccc;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-section ul li a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #fff;
+  padding-left: 5px; /* Nice hover effect */
+}
+
+/* Contact Info Styling */
+.contact-info p {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.contact-info p strong {
+  color: #fff;
+  margin-right: 10px;
+  min-width: 60px; /* Aligns the text */
+}
+
+/* Bottom Copyright Bar */
+.footer-bottom {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #444;
+  color: #888;
+}
